@@ -17,7 +17,7 @@ GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)     #Pulldown på dt
 GPIO.setup(ledpin, GPIO.OUT)
 
 RPI_PWM = GPIO.PWM(ledpin, 1000)
-RPI_PWM.start(0)
+RPI_PWM.start(50)                                       #Starter på 50Hz
 
 counter = 0
 clkLastState = GPIO.input(clk)
@@ -33,6 +33,7 @@ def Limit(number, min_number, max_number):
 try:
     while True:
         if GPIO.input(switch) == 0:
+            print("Trykket")
             switch_state != switch_state            #Hvis encoderen trykkes inn, skru lysene av eller på.
             if switch_state == False:
                 RPI_PWM.stop()
