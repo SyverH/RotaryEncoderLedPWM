@@ -12,7 +12,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 
 GPIO.setup(switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)   #Pullup på switch
-GPIO.Setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    #Pulldown på CLK
+GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    #Pulldown på CLK
 GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)     #Pulldown på dt
 GPIO.setup(ledpin, GPIO.OUT)
 
