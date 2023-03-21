@@ -38,7 +38,7 @@ try:
             if switch_state == False:
                 RPI_PWM.stop()
             if switch_state == True:
-                RPI_PWM.start(0)
+                RPI_PWM.start(50)
         if switch_state == True:                    #Hvis state True, Juster lysene etter encoderen
             clkState = GPIO.input(clk)
             dtState = GPIO.input(dt)
