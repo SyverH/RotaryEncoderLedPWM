@@ -37,8 +37,10 @@ try:
             switch_state != switch_state            #Hvis encoderen trykkes inn, skru lysene av eller på.
             if switch_state == False:
                 RPI_PWM.stop()
+                print("Stopper")
             if switch_state == True:
                 RPI_PWM.start(50)
+                print("starter")
         if switch_state == True:                    #Hvis state True, Juster lysene etter encoderen
             clkState = GPIO.input(clk)
             dtState = GPIO.input(dt)
