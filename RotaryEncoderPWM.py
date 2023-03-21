@@ -32,7 +32,8 @@ def Limit(number, min_number, max_number):
 
 try:
     while True:
-        if GPIO.event_detected(switch):
+        if GPIO.input(switch):
+            sleep(1)
             print("Trykket")
             switch_state ^= 1            #Hvis encoderen trykkes inn, skru lysene av eller på.
             if switch_state == False:
@@ -55,6 +56,6 @@ try:
             clkLastState = clkState
         #else:
          #   RPI_PWM.stop()              #Sett LED frekvens til 0
-        #sleep(0.01)
+        sleep(0.01)
 finally:
     GPIO.cleanup()
