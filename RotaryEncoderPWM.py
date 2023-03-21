@@ -50,3 +50,4 @@ try:
             RPI_PWM.ChangeFrequency(0)              #Sett LED frekvens til 0
 finally:
     GPIO.cleanup()
+#smallfix
