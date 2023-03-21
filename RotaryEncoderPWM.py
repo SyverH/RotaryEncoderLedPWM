@@ -16,8 +16,8 @@ GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    #Pulldown på CLK
 GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)     #Pulldown på dt
 GPIO.setup(ledpin, GPIO.OUT)
 
-RPI_PWM = GPIO.PWM(ledpin, 1000)
-RPI_PWM.start(50)                                       #Starter på 50Hz
+RPI_PWM = GPIO.PWM(ledpin, 100)
+RPI_PWM.start(0)                                       #Starter på 0% Dutycycle
 
 counter = 0
 clkLastState = GPIO.input(clk)
@@ -29,6 +29,12 @@ def Limit(number, min_number, max_number):
         return max_number
     else:
         return number
+
+def my_callback(channel):  
+    if GPIO.input(switch):     # if port 25 == 1  
+        switch_state ^= 1
+
+GPIO.add_event_detect(switch, GPIO.BOTH, callback=my_callback)
 
 try:
     while True:
@@ -49,8 +55,8 @@ try:
                     counter += 1                    #Tell en opp
                 else:
                     counter -= 1                    #Tell en ned
-                counter = Limit(counter, 1, 1000)   #Limit counteren mellom 1 og 1000 (Max og min frekvens)
-                RPI_PWM.ChangeFrequency(counter)    #Sett Frekvensen til led lik counteren
+                counter = Limit(counter, 1, 100)   #Limit counteren mellom 1 og 1000 (Max og min frekvens)
+                RPI_PWM.ChangeDutyCycle(counter)    #Sett Frekvensen til led lik counteren
                 print(counter)
             clkLastState = clkState
         #else:
