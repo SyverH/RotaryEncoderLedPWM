@@ -34,7 +34,7 @@ try:
     while True:
         if GPIO.input(switch) == 0:
             print("Trykket")
-            switch_state != switch_state            #Hvis encoderen trykkes inn, skru lysene av eller på.
+            switch_state ^= 1            #Hvis encoderen trykkes inn, skru lysene av eller på.
             if switch_state == False:
                 RPI_PWM.stop()
                 print("Stopper")
