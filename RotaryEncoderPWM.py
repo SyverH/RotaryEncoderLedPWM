@@ -33,7 +33,7 @@ def Limit(number, min_number, max_number):
 try:
     while True:
         if GPIO.input(switch) == 0:
-            sleep(1)
+            sleep(0.5)
             print("Trykket")
             switch_state ^= 1            #Hvis encoderen trykkes inn, skru lysene av eller på.
             if switch_state == False:
@@ -47,9 +47,9 @@ try:
             dtState = GPIO.input(dt)
             if clkState != clkLastState:
                 if dtState != clkState:
-                    counter += 1                    #Tell en opp
+                    counter += 5                    #Tell en opp
                 else:
-                    counter -= 1                    #Tell en ned
+                    counter -= 5                    #Tell en ned
                 counter = Limit(counter, 1, 100)   #Limit counteren mellom 1 og 1000 (Max og min frekvens)
                 RPI_PWM.ChangeDutyCycle(counter)    #Sett Frekvensen til led lik counteren
                 print(counter)
