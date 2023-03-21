@@ -34,6 +34,10 @@ try:
     while True:
         if GPIO.input(switch) == 0:
             switch_state != switch_state            #Hvis encoderen trykkes inn, skru lysene av eller på.
+            if switch_state == False:
+                RPI_PWM.stop()
+            if switch_state == True:
+                RPI_PWM.start(0)
         if switch_state == True:                    #Hvis state True, Juster lysene etter encoderen
             clkState = GPIO.input(clk)
             dtState = GPIO.input(dt)
@@ -46,8 +50,8 @@ try:
                 RPI_PWM.ChangeFrequency(counter)    #Sett Frekvensen til led lik counteren
                 print(counter)
             clkLastState = clkState
-        else:
-            RPI_PWM.ChangeFrequency(0)              #Sett LED frekvens til 0
-        sleep(0.01)
+        #else:
+         #   RPI_PWM.stop()              #Sett LED frekvens til 0
+        #sleep(0.01)
 finally:
     GPIO.cleanup()
