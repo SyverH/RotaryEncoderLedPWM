@@ -30,27 +30,17 @@ def Limit(number, min_number, max_number):
     else:
         return number
 
-def my_callback(channel):  
-    if GPIO.input(switch):     # if port 25 == 1
-        RPI_PWM.start(50)  
-        switch_state ^= 1
-    else:
-        RPI_PWM.stop()
-        print("Stopper")
-
-GPIO.add_event_detect(switch, GPIO.BOTH, callback=my_callback)
-
 try:
     while True:
-        #if GPIO.input(switch) == 0:
-            #print("Trykket")
-            #switch_state ^= 1            #Hvis encoderen trykkes inn, skru lysene av eller på.
-        #if switch_state == False:
-                #RPI_PWM.stop()
-                #print("Stopper")
-        #if switch_state == True:
-                #RPI_PWM.start(50)
-                #print("starter")
+        if GPIO.event_detected(switch):
+            print("Trykket")
+            switch_state ^= 1            #Hvis encoderen trykkes inn, skru lysene av eller på.
+            if switch_state == False:
+                RPI_PWM.stop()
+                print("Stopper")
+            if switch_state == True:
+                RPI_PWM.start(counter)
+                print("starter")
         if switch_state == True:                    #Hvis state True, Juster lysene etter encoderen
             clkState = GPIO.input(clk)
             dtState = GPIO.input(dt)
