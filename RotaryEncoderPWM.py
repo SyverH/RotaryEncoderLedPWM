@@ -48,5 +48,6 @@ try:
             clkLastState = clkState
         else:
             RPI_PWM.ChangeFrequency(0)              #Sett LED frekvens til 0
+        sleep(0.01)
 finally:
     GPIO.cleanup()
