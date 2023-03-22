@@ -32,8 +32,9 @@ def button_pressed_callback(channel):
     if switch_state == True:
         RPI_PWM.start(counter)
         print("starter")
+    sleep(200)
 
-GPIO.add_event_detect(switch, GPIO.FALLING, callback=button_pressed_callback, bouncetime=200)
+GPIO.add_event_detect(switch, GPIO.RISING, callback=button_pressed_callback, bouncetime=200)
 
 def Limit(number, min_number, max_number):
     if number < min_number:
