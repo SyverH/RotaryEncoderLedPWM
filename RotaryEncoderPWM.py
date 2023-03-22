@@ -74,7 +74,7 @@ try:
 finally:
     GPIO.cleanup()
 '''
-# Effektivitetstest
+# Effektivitetstes
 try:
     while True:    
         if switch_state == True:                    #Hvis state True, Juster lysene etter encoderen
